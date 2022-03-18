@@ -58,47 +58,44 @@ export function commonMerge(
 
 /**
  * 设置树结构数据的node-key
+ * @param target {Array} 目标对象
+ * @param nodeKey {String} node-key属性名
+ * @param keyValue {String} node-key默认值
+ * @param childrenKey {String} children属性名
+ * @param parentKey {String} parent属性名
+ * @param allNodes {Array} 树结构展开集合
+ * @param setParent {Boolean|Object} 是否设置parent引用
  *
+ * @return {Array}  修改后的目标对象
  */
-export function setNodeKey(
+export function setNodeKey({
   target,
-  key = 'node-key',
+  nodeKey = 'node-key',
   keyValue = '',
-  children = 'children'
-) {
-  if (!Array.isArray(target) || !key) {
+  childrenKey = 'children',
+  parentKey = 'parent',
+  allNodes = [],
+  setParent = false,
+}) {
+  if (!Array.isArray(target) || !nodeKey) {
     return target;
   }
   target.forEach((e, index) => {
-    e[key] = keyValue + index;
-    if (Array.isArray(e[children])) {
-      setNodeKey(e[children], key, `${e[key]}-`, children);
+    allNodes.push(e);
+    if (setParent) {
+      e[parentKey] = setParent;
     }
-  });
-  return target;
-}
-
-/**
- * 格式化：code转label
- * @param matchCode {string}   code值
- * @param treeData {Array}   code-label数组
- * @param treeCode {string}   code键值
- * @param treeLabel {string}  label键值
- *
- * @return {string}   label值
- */
-export function treeFormatter(
-  matchCode,
-  treeData,
-  treeCode = 'code',
-  treeLabel = 'label'
-) {
-  let target = '';
-  treeData.forEach((item) => {
-    if (item[treeCode] === matchCode) {
-      target = item[treeLabel];
-    } else if (item.children) {
-      target = treeFormatter(matchCode, item.children, treeCode, treeLabel) || target;
+    e[nodeKey] = keyValue + index;
+    if (Array.isArray(e[childrenKey])) {
+      setNodeKey({
+        target: e[childrenKey],
+        nodeKey,
+        keyValue: `${e[nodeKey]}-`,
+        childrenKey,
+        parentKey,
+        allNodes,
+        setParent: setParent && e
+      });
     }
   });
   return target;
@@ -108,9 +105,9 @@ export function treeFormatter(
  * 过滤树结构：label/code
  * @param filterText {string}   匹配值
  * @param treeData {Array}   code-label数组
- * @param treeCode {string}   code键值
- * @param treeLabel {string}  label键值
- * @param treeChildren {string}  child键值
+ * @param codeKey {string}   code键值
+ * @param labelKey {string}  label键值
+ * @param childrenKey {string}  child键值
  * @param includeCode {boolean}  是否匹配code
  *
  * @return {Array}   label值
@@ -118,9 +115,9 @@ export function treeFormatter(
 export function treeFilter({
   filterText,
   treeData,
-  treeCode = 'code',
-  treeLabel = 'label',
-  treeChildren = 'children',
+  codeKey = 'code',
+  labelKey = 'label',
+  childrenKey = 'children',
   includeCode = false
 }) {
   if (filterText === '') {
@@ -130,23 +127,23 @@ export function treeFilter({
   treeData.forEach((e) => {
     const obj = {};
     if (
-      e[treeLabel].includes(filterText)
-            || (includeCode && e[treeCode].includes(filterText))
+      e[labelKey].includes(filterText)
+            || (includeCode && e[codeKey].includes(filterText))
     ) {
-      Object.assign(obj, e, { [treeChildren]: [] });
+      Object.assign(obj, e, { [childrenKey]: [] });
     }
 
-    if (Array.isArray(e[treeChildren])) {
+    if (Array.isArray(e[childrenKey])) {
       const children = treeFilter({
         filterText,
-        treeData: e[treeChildren],
-        treeCode,
-        treeLabel,
-        treeChildren,
+        treeData: e[childrenKey],
+        codeKey,
+        labelKey,
+        childrenKey,
         includeCode
       });
       if (children.length) {
-        Object.assign(obj, e, { [treeChildren]: children });
+        Object.assign(obj, e, { [childrenKey]: children });
       }
     }
 

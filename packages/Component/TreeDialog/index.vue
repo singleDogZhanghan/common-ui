@@ -50,8 +50,8 @@
 
 
 <script>
-import CommonDialog from '@/Component/CommonDialog/index.vue';
-import { commonMerge, setNodeKey } from '@/Util/commonMethods';
+import CommonDialog from '../CommonDialog/index.vue';
+import { commonMerge, setNodeKey } from '../../Util/commonMethods.js';
 
 export default {
   name: 'TreeDialog',

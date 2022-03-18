@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import CommonDialog from '@/Component/CommonDialog/index';
+import CommonDialog from '../Component/CommonDialog/index.vue';
 
 const CustomConfirmDialog = Vue.extend(CommonDialog);
 const body = document.querySelector('body');

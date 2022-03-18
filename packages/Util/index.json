@@ -1,8 +1,8 @@
 {
-  "createCommonDialog": "@/Util/commonConfirm",
-  "createCommonPrint": "@/Util/commonPrint",
-  "createCommonTreeDialog": "@/Util/commonTreeDialog",
-  "commonMerge": "@/Util/commonMethods",
-  "setNodeKey": "@/Util/commonMethods",
-  "treeFormatter": "@/Util/commonMethods"
+  "createCommonDialog": "@/Util/commonConfirm.js",
+  "createCommonPrint": "@/Util/commonPrint.js",
+  "createCommonTreeDialog": "@/Util/commonTreeDialog.js",
+  "commonMerge": "@/Util/commonMethods.js",
+  "setNodeKey": "@/Util/commonMethods.js"
 }
+

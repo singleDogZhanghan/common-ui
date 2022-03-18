@@ -55,7 +55,7 @@
   </transition>
 </template>
 <script>
-import '@/assets/css/font.css';
+import '../../assets/css/font.css';
 
 export default {
   name: 'CommonDialog',

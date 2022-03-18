@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import TreeDialog from '@/Component/TreeDialog/index';
+import TreeDialog from '../Component/TreeDialog/index.vue';
 
 const CustomTreeDialog = Vue.extend(TreeDialog);
 

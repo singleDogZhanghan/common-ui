@@ -1,10 +1,28 @@
-import CommonDialog from '@/Component/CommonDialog/index.vue';
-import LazySelect from '@/Component/LazySelect/index.vue';
-import TreeDialog from '@/Component/TreeDialog/index.vue';
-import { createCommonDialog } from '@/Util/commonConfirm';
-import { createCommonPrint } from '@/Util/commonPrint';
-import { createCommonTreeDialog } from '@/Util/commonTreeDialog';
-import { commonMerge, setNodeKey, treeFormatter } from '@/Util/commonMethods';
+import CommonDialog from './Component/CommonDialog/index.vue';
+import LazySelect from './Component/LazySelect/index.vue';
+import TreeDialog from './Component/TreeDialog/index.vue';
+import { createCommonDialog } from './Util/commonConfirm.js';
+import { createCommonPrint } from './Util/commonPrint.js';
+import { createCommonTreeDialog } from './Util/commonTreeDialog.js';
+import { commonMerge, setNodeKey } from './Util/commonMethods.js';
+
+import packageConfig from '../package.json'
+
+const r = [
+  'color: #fff',
+  'border-top-left-radius:3px',
+  'border-bottom-left-radius:3px',
+  'background-color: #564b4f',
+  'padding: 5px'
+].join(';');
+const i = [
+  'color: #fff',
+  'border-top-right-radius:3px',
+  'border-bottom-right-radius:3px',
+  'background-color: #4fc08d',
+  'padding: 5px'
+].join(';');
+console.log('%cCommonUIVersion %c'.concat(packageConfig.version), r, i);
 
 const components = {
   CommonDialog,
@@ -18,7 +36,6 @@ const methods = {
   createCommonTreeDialog,
   commonMerge,
   setNodeKey,
-  treeFormatter,
 };
 
 // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
@@ -49,6 +66,5 @@ export {
   createCommonPrint,
   createCommonTreeDialog,
   commonMerge,
-  setNodeKey,
-  treeFormatter
+  setNodeKey
 }

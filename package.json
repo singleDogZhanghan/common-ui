@@ -1,23 +1,30 @@
 {
   "name": "common-ui-zh",
-  "version": "0.0.1",
+  "version": "0.0.7-beta.1",
   "private": false,
+  "files": [
+    "packages"
+  ],
+  "main": "packages/index.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "node build/build-entry.js && vue-cli-service build --target lib --name common-ui --dest lib packages/index.js"
+    "lib": "node build/build-entry.js && vue-cli-service build --target lib --name common-ui-zh --dest lib packages/index.js"
   },
-  "files": [
-    "lib"
-  ],
-  "main": "lib/common-ui.umd.js",
   "dependencies": {
-    "core-js": "^3.6.5",
-    "element-ui": "2.13.2",
-    "vue": "^2.6.11"
+    "qrcode": "^1.4.4",
+    "jsbarcode": "^3.11.4"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.11",
+    "element-ui": "^2.13.2"
   },
   "devDependencies": {
+    "core-js": "^3.6.5",
+    "element-ui": "2.13.2",
+    "vue": "^2.6.11",
+    "fs-extra": "^10.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "~4.5.0",
@@ -28,9 +35,7 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "file-loader": "^6.2.0",
-    "jsbarcode": "^3.11.4",
     "node-sass": "^4.11.0",
-    "qrcode": "^1.4.4",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.11"
   },
@@ -42,7 +47,12 @@
     "last 2 versions",
     "not dead"
   ],
-  "description": "## Project setup ``` yarn install ```",
+  "keywords": [
+    "Element",
+    "Vue",
+    "Components"
+  ],
+  "description": "A Component library based on Element-UI",
   "directories": {
     "example": "examples",
     "lib": "lib"

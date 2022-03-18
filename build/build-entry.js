@@ -11,7 +11,7 @@ const componentsNames = Object.keys(components);
 const methodsNames = Object.keys(methods);
 // 生成组件import字符串
 const importComponentStr = componentsNames.map((e) => {
-  return `import ${e} from '${components[e]}';`;
+  return `import ${e} from '${components[e].replace('@', '.')}';`;
 }).join(endOfLine) + endOfLine;
 // 合并相同path的import
 const methodMap = {};
@@ -25,9 +25,28 @@ methodsNames.forEach((key) => {
 })
 // 生成函数import字符串
 const importMethodStr = Object.keys(methodMap).map((path) => {
-  return `import { ${methodMap[path]} } from '${path}';`;
+  return `import { ${methodMap[path]} } from '${path.replace('@', '.')}';`;
 }).join(endOfLine) + endOfLine;
 
+const versionStr = `
+import packageConfig from '../package.json'
+
+const r = [
+  'color: #fff',
+  'border-top-left-radius:3px',
+  'border-bottom-left-radius:3px',
+  'background-color: #564b4f',
+  'padding: 5px'
+].join(';');
+const i = [
+  'color: #fff',
+  'border-top-right-radius:3px',
+  'border-bottom-right-radius:3px',
+  'background-color: #4fc08d',
+  'padding: 5px'
+].join(';');
+console.log('%cCommonUIVersion %c'.concat(packageConfig.version), r, i);
+`
 // 生成install函数和全局对象绑定
 const installStr = `
 const components = {
@@ -64,7 +83,7 @@ export {
   ${componentsNames.join(`,${endOfLine}  `)},
   ${methodsNames.join(`,${endOfLine}  `)}
 }`
-const templateStr = `${importComponentStr}${importMethodStr}${installStr}${defaultExportStr}
+const templateStr = `${importComponentStr}${importMethodStr}${versionStr}${installStr}${defaultExportStr}
 `
 // fs.writeFileSync(OUTPUT_PATH, templateStr.join(endOfLine));
 fs.writeFileSync(OUTPUT_PATH, templateStr);
