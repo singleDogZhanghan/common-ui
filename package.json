@@ -1,11 +1,12 @@
 {
   "name": "common-ui-zh",
-  "version": "0.0.7-beta.1",
+  "version": "0.0.7-beta.2",
   "private": false,
   "files": [
+    "lib",
     "packages"
   ],
-  "main": "packages/index.js",
+  "main": "lib/common-ui-zh.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -18,7 +19,8 @@
   },
   "peerDependencies": {
     "vue": "^2.6.11",
-    "element-ui": "^2.13.2"
+    "element-ui": "^2.13.2",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "core-js": "^3.6.5",
@@ -37,7 +39,8 @@
     "file-loader": "^6.2.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "lodash": "^4.17.20"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

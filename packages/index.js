@@ -1,6 +1,7 @@
 import CommonDialog from './Component/CommonDialog/index.vue';
 import LazySelect from './Component/LazySelect/index.vue';
 import TreeDialog from './Component/TreeDialog/index.vue';
+import TransferTree from './Component/TransferTree/index.vue';
 import { createCommonDialog } from './Util/commonConfirm.js';
 import { createCommonPrint } from './Util/commonPrint.js';
 import { createCommonTreeDialog } from './Util/commonTreeDialog.js';
@@ -28,6 +29,7 @@ const components = {
   CommonDialog,
   LazySelect,
   TreeDialog,
+  TransferTree,
 };
 
 const methods = {
@@ -62,6 +64,7 @@ export {
   CommonDialog,
   LazySelect,
   TreeDialog,
+  TransferTree,
   createCommonDialog,
   createCommonPrint,
   createCommonTreeDialog,
