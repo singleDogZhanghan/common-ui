@@ -1,8 +1,0 @@
-{
-  "createCommonDialog": "@/Util/commonConfirm.js",
-  "createCommonPrint": "@/Util/commonPrint.js",
-  "createCommonTreeDialog": "@/Util/commonTreeDialog.js",
-  "commonMerge": "@/Util/commonMethods.js",
-  "setNodeKey": "@/Util/commonMethods.js"
-}
-

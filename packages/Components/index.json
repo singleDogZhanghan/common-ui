@@ -1,0 +1,9 @@
+{
+  "AifpDialog": "./Components/AifpDialog/index.vue",
+  "LazySelect": "./Components/LazySelect/index.vue",
+  "TransferTree": "./Components/TransferTree/index.vue",
+  "AifpView": "./Components/AifpView/index.vue",
+  "AifpFlowChart": "./Components/AifpFlowChart/index.vue",
+  "AifpCronInput": "./Components/AifpCronInput/index.vue",
+  "LazyTree": "./Components/LazyTree/LazyTree.vue"
+}

@@ -208,7 +208,7 @@
 <script>
 import { cloneDeep } from 'lodash';
 import { removeClass } from 'element-ui/src/utils/dom';
-import { commonMerge } from '../../Util/commonMethods.js';
+import { commonMerge } from '../../Utils/commonMethods.js';
 
 export default {
   name: 'TransferTree',

@@ -1,6 +1,0 @@
-{
-  "CommonDialog": "@/Component/CommonDialog/index.vue",
-  "LazySelect": "@/Component/LazySelect/index.vue",
-  "TreeDialog": "@/Component/TreeDialog/index.vue",
-  "TransferTree": "@/Component/TransferTree/index.vue"
-}

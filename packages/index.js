@@ -1,13 +1,19 @@
-import CommonDialog from './Component/CommonDialog/index.vue';
-import LazySelect from './Component/LazySelect/index.vue';
-import TreeDialog from './Component/TreeDialog/index.vue';
-import TransferTree from './Component/TransferTree/index.vue';
-import { createCommonDialog } from './Util/commonConfirm.js';
-import { createCommonPrint } from './Util/commonPrint.js';
-import { createCommonTreeDialog } from './Util/commonTreeDialog.js';
-import { commonMerge, setNodeKey } from './Util/commonMethods.js';
+import AifpDialog from './Components/AifpDialog/index.vue';
+import LazySelect from './Components/LazySelect/index.vue';
+import TransferTree from './Components/TransferTree/index.vue';
+import AifpView from './Components/AifpView/index.vue';
+import AifpFlowChart from './Components/AifpFlowChart/index.vue';
+import AifpCronInput from './Components/AifpCronInput/index.vue';
+import LazyTree from './Components/LazyTree/LazyTree.vue';
+import { createConfirmDialog } from './Utils/commonConfirm.js';
+import { commonMerge, setNodeKey, loadMore } from './Utils/commonMethods.js';
+import { createCommonPrint } from './Utils/commonPrint.js';
+import { createDoubleScreen } from './Utils/commonDoubleScreen.js';
+import { commonLoading } from './Utils/commonLoading.js';
+import { getIP } from './Utils/getIP.js';
+import { draggable } from './Utils/draggable.js';
 
-import packageConfig from '../package.json'
+import packageConfig from '../package.json';
 
 const r = [
   'color: #fff',
@@ -23,22 +29,31 @@ const i = [
   'background-color: #4fc08d',
   'padding: 5px'
 ].join(';');
-console.log('%cCommonUIVersion %c'.concat(packageConfig.version), r, i);
+console.log('%cAifpUIVersion %c'.concat(packageConfig.version), r, i);
 
 const components = {
-  CommonDialog,
+  AifpDialog,
   LazySelect,
-  TreeDialog,
   TransferTree,
+  AifpView,
+  AifpFlowChart,
+  AifpCronInput,
+  LazyTree,
 };
 
 const methods = {
-  createCommonDialog,
-  createCommonPrint,
-  createCommonTreeDialog,
+  createConfirmDialog,
   commonMerge,
   setNodeKey,
+  createCommonPrint,
+  createDoubleScreen,
+  loadMore,
+  commonLoading,
+  getIP,
+  draggable,
 };
+
+const commonMethods = methods;
 
 // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
 const install = function (Vue) {
@@ -57,17 +72,26 @@ export default {
   // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
   install,
   ...components,
-  ...methods
+  ...methods,
+  commonMethods
 };
 
 export {
-  CommonDialog,
+  AifpDialog,
   LazySelect,
-  TreeDialog,
   TransferTree,
-  createCommonDialog,
-  createCommonPrint,
-  createCommonTreeDialog,
+  AifpView,
+  AifpFlowChart,
+  AifpCronInput,
+  LazyTree,
+  createConfirmDialog,
   commonMerge,
-  setNodeKey
+  setNodeKey,
+  createCommonPrint,
+  createDoubleScreen,
+  loadMore,
+  commonLoading,
+  getIP,
+  draggable,
+  commonMethods,
 }

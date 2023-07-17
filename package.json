@@ -1,12 +1,12 @@
 {
   "name": "common-ui-zh",
-  "version": "0.0.7-beta.2",
+  "version": "0.0.7-alpha.3",
   "private": false,
   "files": [
-    "lib",
-    "packages"
+    "packages",
+    "lib"
   ],
-  "main": "lib/common-ui-zh.common.js",
+  "main": "packages/index.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,33 +14,38 @@
     "lib": "node build/build-entry.js && vue-cli-service build --target lib --name common-ui-zh --dest lib packages/index.js"
   },
   "dependencies": {
+    "element-ui": "^2.13.2",
+    "jsbarcode": "^3.11.4",
+    "jsplumb": "2.15.6",
+    "lodash": "^4.17.20",
     "qrcode": "^1.4.4",
-    "jsbarcode": "^3.11.4"
+    "vue": "2.6.14"
   },
   "peerDependencies": {
-    "vue": "^2.6.11",
     "element-ui": "^2.13.2",
-    "lodash": "^4.17.20"
+    "jsbarcode": "^3.11.4",
+    "jsplumb": "2.15.6",
+    "lodash": "^4.17.20",
+    "qrcode": "^1.4.4",
+    "vue": "2.6.14"
   },
   "devDependencies": {
-    "core-js": "^3.6.5",
-    "element-ui": "2.13.2",
-    "vue": "^2.6.11",
-    "fs-extra": "^10.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.0.1",
+    "core-js": "^3.6.5",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "file-loader": "^6.2.0",
-    "node-sass": "^4.11.0",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.20",
+    "sass": "1.63.6",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.11",
-    "lodash": "^4.17.20"
+    "vue-template-compiler": "2.6.14"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

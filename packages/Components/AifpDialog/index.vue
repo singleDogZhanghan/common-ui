@@ -1,6 +1,6 @@
 <template>
-  <transition :name="openMode">
-    <div v-if="visible" class="common-mask">
+  <transition name="dialog-fade" @after-leave="afterLeave">
+    <div class="common-mask" v-show="visible" :style="{zIndex}">
       <div class="a-dialog-block a-dialog" :style="dialogStyle">
         <div class="a-dialog-block a-dialog-toolbar" v-if="showFullScreen">
           <span
@@ -8,7 +8,7 @@
               @click="fullScreen = !fullScreen"
           >
             <i
-                class="iconfont"
+                class="aifp-dialog-iconfont"
                 :class="fullScreen ? 'icon-full-screen' : 'icon-not-full-screen'"
             />
           </span>
@@ -19,10 +19,14 @@
             @click="cancel"
             v-if="showCloseButton"
         >
-          <i class="iconfont icon-close"/>
+          <i class="aifp-dialog-iconfont icon-close"/>
         </div>
 
-        <div class="a-dialog-block a-dialog-head" v-if="title">{{ title }}</div>
+        <div class="a-dialog-block a-dialog-head" v-if="title">
+          <slot name="title">
+            {{ title }}
+          </slot>
+        </div>
 
         <div class="a-dialog-block a-dialog-body">
           <slot name="content"/>
@@ -53,12 +57,13 @@
       </div>
     </div>
   </transition>
+
 </template>
 <script>
 import '../../assets/css/font.css';
 
 export default {
-  name: 'CommonDialog',
+  name: 'AifpDialog',
   props: {
     visible: {
       type: Boolean,
@@ -106,6 +111,9 @@ export default {
     confirmCallback: {
       type: Function
     },
+    closedCallback: {
+      type: Function
+    },
     message: {
       type: String
     },
@@ -128,11 +136,22 @@ export default {
     openMode: {
       type: String,
       default: 'el-fade-in'
+    },
+    zIndex: {
+      type: Number,
+      default: () => {
+        const jBody = document.querySelector('#J_body');
+        if (!jBody || !jBody.children.length) {
+          return 199;
+        }
+        return Math.max(199, ...Array.from(jBody.children).map(e => Number(e.style['z-index'])));
+      }
     }
   },
   data() {
     return {
-      fullScreen: false
+      fullScreen: false,
+      isConfirm: false,
     };
   },
   computed: {
@@ -174,7 +193,7 @@ export default {
   },
   methods: {
     cancel() {
-      this.fullScreen = false;
+      this.isConfirm = false;
       this.$emit('update:visible', false);
       this.$emit('cancel');
       if (this.cancelCallback) {
@@ -182,11 +201,18 @@ export default {
       }
     },
     confirm() {
-      this.fullScreen = false;
+      this.isConfirm = true;
       this.$emit('update:visible', false);
       this.$emit('confirm');
       if (this.confirmCallback) {
         this.confirmCallback();
+      }
+    },
+    afterLeave() {
+      this.fullScreen = false;
+      this.$emit('closed', this.isConfirm);
+      if (this.closedCallback) {
+        this.closedCallback(this.isConfirm);
       }
     }
   }
@@ -194,13 +220,14 @@ export default {
 </script>
 <style lang="scss">
 .common-mask {
+  transition: all .25s ease-in-out;
   position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
-  z-index: 200;
+  z-index: 199;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,13 +243,13 @@ export default {
   overflow: hidden;
   background: #fff;
   color: #596b89;
-  transition: all 0.5s;
+  transition: all 0.25s;
 
-  .iconfont {
+  .aifp-dialog-iconfont {
     font-size: 14px;
     color: #bbc5d5;
     font-style: normal;
-    font-family: "iconfont" !important;
+    font-family: "aifp-dialog-iconfont" !important;
     cursor: pointer;
   }
 
@@ -263,7 +290,7 @@ export default {
     line-height: 24px;
     text-align: center;
 
-    .iconfont {
+    .aifp-dialog-iconfont {
       font-size: 10px;
     }
 
@@ -285,6 +312,7 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    box-sizing: border-box;
   }
 
   .a-dialog-body {
@@ -338,8 +366,11 @@ export default {
 .message-content {
   text-align: center;
   width: 100%;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 20px;
+  line-height: 20px;
+  color: #333333;
 }
 
 .el-image {

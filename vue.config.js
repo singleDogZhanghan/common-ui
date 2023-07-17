@@ -11,30 +11,18 @@ module.exports = {
   },
   // 扩展 webpack 配置，使 packages 加入编译
   chainWebpack: (config) => {
-    config.module
-      .rule('js')
-      .include.add('/packages/')
-      .end()
-      .use('babel')
-      .loader('babel-loader')
-      .tap((options) => {
-        // 修改它的选项...
-        return options;
-      })
+    // config.module
+    //   .rule('js')
+    //   .include.add('/packages/')
+    //   .end()
+    //   .use('babel')
+    //   .loader('babel-loader')
+    //   .tap((options) => {
+    //     // 修改它的选项...
+    //     return options;
+    //   })
     // config.resolve.alias
     //   .set('@', resolve('packages'))
-    config.module
-      .rule('ts')
-      .include.add(resolve(__dirname, 'packages/index.d.ts'))
-      .end()
-      .use('file-loader')
-      .loader('file-loader')
-      .tap(() => {
-        return {
-          name: 'index.d.ts'
-        };
-      })
-      .end();
   },
   configureWebpack: {
     resolve: {
@@ -42,5 +30,14 @@ module.exports = {
         '@': resolve('packages'),
       },
     },
+    module: {
+      rules: [
+        {
+          test: /\.(jsx?|babel|es6)$/,
+          exclude: /node_module/,
+          loader: 'babel-loader'
+        },
+      ]
+    }
   },
 };

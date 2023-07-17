@@ -1,0 +1,11 @@
+{
+  "createConfirmDialog": "./Utils/commonConfirm.js",
+  "commonMerge": "./Utils/commonMethods.js",
+  "setNodeKey": "./Utils/commonMethods.js",
+  "createCommonPrint": "./Utils/commonPrint.js",
+  "createDoubleScreen": "./Utils/commonDoubleScreen.js",
+  "loadMore": "./Utils/commonMethods.js",
+  "commonLoading": "./Utils/commonLoading.js",
+  "getIP": "./Utils/getIP.js",
+  "draggable": "./Utils/draggable.js"
+}
